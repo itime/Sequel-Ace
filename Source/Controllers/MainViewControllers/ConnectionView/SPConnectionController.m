@@ -2419,10 +2419,58 @@ static NSComparisonResult _compareFavoritesUsingKey(id favorite1, id favorite2, 
 	// Only display the connection error message if there is a window visible
 	if ([[dbDocument parentWindowControllerWindow] isVisible]) {
         errorShowing = YES;
+
+		NSScrollView *scrollView = [[NSScrollView alloc] initWithFrame:NSMakeRect(20, 150, 400, 400)];
+		[scrollView setHasVerticalScroller:YES];
+		[scrollView setHasHorizontalScroller:NO];
+		[scrollView setBorderType:NSLineBorder];
+		[scrollView setDrawsBackground:NO];
+		[scrollView setHorizontalScrollElasticity:NSScrollElasticityNone];
+
+		NSTextView *_textView = [[NSTextView alloc] initWithFrame:NSMakeRect(0, 0, 400, 100)];
+		[_textView setDrawsBackground:NO];
+		[_textView setTextColor:[NSColor blackColor]];
+		[_textView setFont:[NSFont systemFontOfSize:12]];
+		[_textView setMinSize:NSMakeSize(400, 100)];
+		[_textView setMaxSize:NSMakeSize(400, FLT_MAX)];
+		[_textView setVerticallyResizable:YES];
+		[_textView setHorizontallyResizable:NO];
+		[_textView setAutomaticLinkDetectionEnabled:NO];
+		[_textView setUsesFontPanel:NO];
+		[[_textView textContainer] setContainerSize:NSMakeSize(400, FLT_MAX)];
+		[[_textView textContainer] setWidthTracksTextView:YES];
+		NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+		[paragraphStyle setLineSpacing:4.0];
+		[_textView setDefaultParagraphStyle:paragraphStyle];
+
+		NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSize]];
+		NSDictionary *textAttributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+		[_textView insertText:[[NSAttributedString alloc] initWithString:errorMessage
+															attributes:textAttributes]];
+		
+
+		// NSTextView *accessory = [[NSTextView alloc] initWithFrame:NSMakeRect(0,0,200,15)];
+		// NSFont *font = [NSFont systemFontOfSize:[NSFont systemFontSize]];
+		// NSDictionary *textAttributes = [NSDictionary dictionaryWithObject:font forKey:NSFontAttributeName];
+		// [accessory insertText:[[NSAttributedString alloc] initWithString:errorMessage
+		// 													attributes:textAttributes]];
+		// [accessory setEditable:NO];
+		// [accessory setDrawsBackground:NO];
+		// [accessory setMinSize:NSMakeSize(400, 100)];
+		// [accessory setMaxSize:NSMakeSize(400, FLT_MAX)];
+
+		[scrollView setDocumentView:_textView];
+    	// [self.window.contentView addSubview:scrollView];
+
 		NSAlert *alert = [[NSAlert alloc] init];
 		[alert setMessageText:theTitle];
-		[alert setInformativeText:errorMessage];
+		// [alert setInformativeText:@"错误"];
 		[alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK button")];
+
+		alert.accessoryView = scrollView;
+		// alert.accessoryView = accessory;
+
+		
 		if (isSSHTunnelBindError) {
 			[alert addButtonWithTitle:NSLocalizedString(@"Use Standard Connection", @"use standard connection button")];
 		}

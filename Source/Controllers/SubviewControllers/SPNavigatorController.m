@@ -1191,21 +1191,22 @@ static NSComparisonResult compareStrings(NSString *s1, NSString *s2, void* conte
 			case 0:
 				return NSLocalizedString(@"Type", @"type label (Navigator)");
 			case 1:
-				return NSLocalizedString(@"Default", @"default label");
-			case 2:
-				return NSLocalizedString(@"Is Nullable", @"is nullable label (Navigator)");
-			case 3:
-				return NSLocalizedString(@"Encoding", @"encoding label (Navigator)");
-			case 4:
-				return NSLocalizedString(@"Collation", @"collation label (Navigator)");
-			case 5:
-				return NSLocalizedString(@"Key", @"key label (Navigator)");
-			case 6:
-				return NSLocalizedString(@"Extra", @"extra label (Navigator)");
-			case 7:
-				return NSLocalizedString(@"Privileges", @"privileges label (Navigator)");
-			case 8:
 				return NSLocalizedString(@"Comment", @"comment label");
+			case 2:
+				return NSLocalizedString(@"Default", @"default label");
+			case 3:
+				return NSLocalizedString(@"Is Nullable", @"is nullable label (Navigator)");
+			case 4:
+				return NSLocalizedString(@"Encoding", @"encoding label (Navigator)");
+			case 5:
+				return NSLocalizedString(@"Collation", @"collation label (Navigator)");
+			case 6:
+				return NSLocalizedString(@"Key", @"key label (Navigator)");
+			case 7:
+				return NSLocalizedString(@"Extra", @"extra label (Navigator)");
+			case 8:
+				return NSLocalizedString(@"Privileges", @"privileges label (Navigator)");
+				
 		}
 	}
 	else if(type == SPTableTypeProc) {

@@ -166,6 +166,7 @@ static void _BuildMenuWithPills(NSMenu *menu,struct _cmpMap *map,size_t mapEntri
 		[NSSortDescriptor sortDescriptorWithKey: @"name" ascending: YES selector: @selector(compare:)],
 		[NSSortDescriptor sortDescriptorWithKey: @"type" ascending: YES selector: @selector(compare:)],
 		[NSSortDescriptor sortDescriptorWithKey: @"length" ascending: YES comparator: numCompare],
+		[NSSortDescriptor sortDescriptorWithKey: @"comment" ascending: YES selector: @selector(compare:)],
         [NSSortDescriptor sortDescriptorWithKey: @"unsigned" ascending: YES comparator: numCompare],
         [NSSortDescriptor sortDescriptorWithKey: @"zerofill" ascending: YES comparator: numCompare],
         [NSSortDescriptor sortDescriptorWithKey: @"binary" ascending: YES comparator: numCompare],
@@ -173,7 +174,6 @@ static void _BuildMenuWithPills(NSMenu *menu,struct _cmpMap *map,size_t mapEntri
 		[NSSortDescriptor sortDescriptorWithKey: @"Key" ascending: YES selector: @selector(compare:)],
 		[NSSortDescriptor sortDescriptorWithKey: @"default" ascending: YES selector: @selector(compare:)],
 		[NSSortDescriptor sortDescriptorWithKey: @"Extra" ascending: YES selector: @selector(compare:)],
-		[NSSortDescriptor sortDescriptorWithKey: @"comment" ascending: YES selector: @selector(compare:)],
         [NSSortDescriptor sortDescriptorWithKey: @"encodingName" ascending: YES selector: @selector(compare:)],
         [NSSortDescriptor sortDescriptorWithKey: @"collationName" ascending: YES selector: @selector(compare:)]
     ] aliases:@{ @"collation": @"collationName", @"encoding": @"encodingName" }];
@@ -308,7 +308,7 @@ static void _BuildMenuWithPills(NSMenu *menu,struct _cmpMap *map,size_t mapEntri
 	
 	[[self activeFieldsSource] insertObject:[NSMutableDictionary
 							   dictionaryWithObjects:[NSArray arrayWithObjects:@"", @"INT", @"", @"0", @"0", @"0", allowNull ? @"1" : @"0", @"", [prefs stringForKey:SPNullValue], @"None", @"", nil]
-							   forKeys:@[@"name", @"type", @"length", @"unsigned", @"zerofill", @"binary", @"null", @"Key", @"default", @"Extra", @"comment"]]
+							   forKeys:@[@"name", @"type", @"length", @"comment", @"unsigned", @"zerofill", @"binary", @"null", @"Key", @"default", @"Extra"]]
 					  atIndex:insertIndex];
 
 	[tableSourceView reloadData];
@@ -1729,7 +1729,7 @@ static void _BuildMenuWithPills(NSMenu *menu,struct _cmpMap *map,size_t mapEntri
 		NSString *columnEncoding = [rowData safeObjectForKey:@"encodingName"];
 		NSString *columnCollation = [rowData safeObjectForKey:@"collationName"]; // loadTable: has already inferred it, if not set explicit
 
-#warning Building the collation menu here is a big performance hog. This should be done in menuNeedsUpdate: below!
+		//warning Building the collation menu here is a big performance hog. This should be done in menuNeedsUpdate: below!
 		NSPopUpButtonCell *collationCell = [tableColumn dataCell];
 		[collationCell removeAllItems];
 		[collationCell addItemWithTitle:@"dummy"];

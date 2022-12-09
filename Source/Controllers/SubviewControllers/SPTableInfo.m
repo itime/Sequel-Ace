@@ -246,6 +246,11 @@
 				[info addObject:[NSString stringWithFormat:NSLocalizedString(@"auto_increment: %@", @"Table Info Section : current value of auto_increment"),
 					[NSNumberFormatter.decimalStyleFormatter stringFromNumber:[NSNumber numberWithLongLong:tableStatusAutoIncrementAsLong]]]];
 			}
+
+			// Check for 'Comment' == NULL - should not happen (at least not with MySQL)
+			if (![[tableStatus objectForKey:@"Comment"] isNSNull]) {
+				[info safeAddObject:[NSString stringWithFormat:NSLocalizedString(@"comment: %@", @"Table Info Section : Table Comment"), [tableStatus objectForKey:@"Comment"]]];
+			}
             
             //Show create_options
             NSString *tableCreateOptions = [tableStatus safeObjectForKey:@"Create_options"];

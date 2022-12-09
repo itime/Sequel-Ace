@@ -1152,6 +1152,9 @@
 /* Table Info Section : Table Engine */
 "engine: %@" = "存储引擎：%@";
 
+/* Table Info Section : Table Comment */
+"comment: %@" = "注释：%@";
+
 /* enter connection details label */
 "Enter connection details below, or choose a favorite" = "填写以下连接信息，或从个人收藏中选择：";
 

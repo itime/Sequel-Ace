@@ -1152,6 +1152,9 @@
 /* Table Info Section : Table Engine */
 "engine: %@" = "engine: %@";
 
+/* Table Info Section : Table Comment */
+"comment: %@" = "comment：%@";
+
 /* enter connection details label */
 "Enter connection details below, or choose a favorite" = "Enter connection details below, or choose a favorite";
 

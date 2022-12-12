@@ -19,6 +19,12 @@ import Foundation
             attributedString.append(NSAttributedString(string: NSString.columnHeaderSplittingSpace as String))
             attributedString.append(NSAttributedString(string: columnType, attributes: [.font: NSFontManager.shared.convert(font, toSize: 8), .foregroundColor: NSColor.gray]))
         }
+
+        if let columnComment: String = value(forKey: "comment") as? String {
+            attributedString.append(NSAttributedString(string: NSString.columnHeaderSplittingSpace as String))
+            attributedString.append(NSAttributedString(string: columnComment, attributes: [.font: NSFontManager.shared.convert(font, toSize: 8), .foregroundColor: NSColor.black]))
+        }
+
         return attributedString
     }
 }
